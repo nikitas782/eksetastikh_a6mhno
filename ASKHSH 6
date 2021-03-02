@@ -1,0 +1,40 @@
+import tweepy,re
+consumer_key = ""
+consumer_secret = ""
+access_token = ""
+access_token_secret = ""
+
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+api = tweepy.API(auth)
+
+string1=""
+
+userID ="MetalHammer"
+tweets = api.user_timeline(screen_name=userID,
+                           count=10,
+                           include_rts = False,
+                           tweet_mode = 'extended' #gia na vgei oloklhro to keimeno
+                           )
+for info in tweets :
+    string1 = string1 + (info.full_text)
+
+
+
+
+
+
+new_str1 = re.sub("[^\w]"," ",string1).split() #lista xwris eidikous xarakthres
+
+
+
+sorted_str1 = sorted(new_str1, key=len) #taksinomhsh listas
+print("Oi 5 megaluteres lekseis einai:")
+
+for i in range (-5,-1):
+    print(sorted_str1[i])
+
+print("Oi 5 mikroteres lekseis einai:")
+
+for i in range (5):
+    print(sorted_str1[i])
