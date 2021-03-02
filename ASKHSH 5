@@ -1,0 +1,72 @@
+import random
+while True:
+    print("ΔΩΣΕ ΔΙΑΣΤΑΣΕΙΣ ΥΨΟΥΣ ΚΑΙ ΠΛΑΤΟΥΣ")
+    height = int(input())
+    witdh = int(input())
+    if height != witdh: #an einai isa tha einai tetragwno
+        if height >= 3 and witdh >= 3: #megalutera 3 gia na mporei na sxhmatistei sos
+            break
+        else:
+            continue
+
+emvadon = height * witdh
+oriz = 0
+kath = 0
+diag = 0
+for i in range(100):
+    if emvadon % 2 != 0:
+        list1 = ['S', 'O'] * (int(emvadon/2)+1)
+        random_item_from_list = random.choice(list1)
+        list1.remove(random_item_from_list)
+    else:
+        list1 = ['S', 'O'] * int(emvadon/2)
+
+    random.shuffle(list1)
+
+
+    def chunks(lst, n):  # spaw th lista gia na parei morfh parallhlogrammou
+        return [lst[i:i + n] for i in range(0, len(lst), n)]
+    list1 = chunks(list1, witdh)
+
+
+    for i in range(height):
+        for j in range (witdh-2):
+            if list1[i][j] == 'S' and list1[i][j+1] == 'O' and list1[i][j+2] == 'S':
+                oriz += 1
+
+    for i in range(height-2):
+        for j in range (witdh):
+            if list1[i][j] == 'S' and list1[i+1][j] == 'O' and list1[i+2][j] == 'S':
+                kath += 1
+
+    for i in range(height - 2):
+        j = 0
+        while i < (height-2):
+            if list1[i][j] == 'S' and list1[i+1][j+1] == 'O' and list1[i+2][j+2] == 'S':
+                diag += 1
+            i += 1
+            j += 1
+    for j in range(1,(witdh - 2)):
+        i = 0
+        while j < (witdh - 2):
+            if list1[i][j] == 'S' and list1[i + 1][j + 1] == 'O' and list1[i + 2][j + 2] == 'S':
+                diag += 1
+            i += 1
+            j += 1
+    for i in range(height-2):
+        j = witdh - 1
+        while i < (height-2):
+            if list1[i][j] == 'S' and list1[i + 1][j - 1] == 'O' and list1[i + 2][j - 2] == 'S':
+                diag += 1
+            i += 1
+            j -= 1
+    for i in range(height-2,1,-1):
+        j = 0
+        while i > 1:
+            if list1[i][j] == 'S' and list1[i - 1][j + 1] == 'O' and list1[i - 2][j + 2] == 'S':
+                diag += 1
+            i -= 1
+            j += 1
+SosCounter = oriz + kath + diag
+MesosOros = SosCounter / 100
+print(MesosOros)
