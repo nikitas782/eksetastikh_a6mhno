@@ -1,0 +1,113 @@
+import random
+while True:
+    print("ΔΩΣΕ ΔΙΑΣΤΑΣΕΙΣ ΤΕΤΡΑΓΩΝΟΥ")
+    dim = int(input())
+    if dim < 4: #an einai mikrotero apo 4 den ginetai na emfanistoun 4ades
+        continue
+    else:
+        break
+ori = 0
+kath = 0
+diag = 0
+for x in range (100):
+    if dim % 2 != 0: #gia mono arithmo prepei na afairethei ena stoixeio gia na vgei tetragwno
+        list1 = [0, 1] * (int((dim ** 2)/2)+1)
+        random_item_from_list = random.choice(list1)
+        list1.remove(random_item_from_list)
+
+    else:
+        list1 = [0, 1] * (int((dim ** 2) / 2))
+
+    random.shuffle(list1)
+
+
+    def chunks(lst, n): #spaw th lista gia na parei morfh tetragwnou
+        return [lst[i:i + n] for i in range(0, len(lst), n)]
+
+    list1 = chunks(list1, dim)
+
+
+
+
+
+    for i in range (dim):  #elegxos orizontia
+        c = 0
+        for j in range (dim):
+            if list1[i][j] == 1:
+                c += 1
+                if c >= 4:
+                    ori += 1
+            else:
+                c = 0
+    for i in range (dim):#elegxos katheta
+        c = 0
+        for j in range (dim):
+            if list1[j][i] == 1:
+                c += 1
+                if c >= 4:
+                    kath += 1
+            else:
+                c = 0
+    
+    for i in range (dim - 3): #elegxos diagwniwn
+        j = 0
+        c = 0
+        while i < dim:
+    
+            if list1[i][j] == 1:
+                c += 1
+                if c >= 4:
+                    diag += 1
+            else:
+                c = 0
+            i += 1
+            j += 1
+    
+    for j in range (1,(dim - 3),1):
+        i = 0
+        c = 0
+        while j < dim:
+    
+            if list1[i][j] == 1:
+                c += 1
+                if c >= 4:
+                    diag += 1
+            else:
+                c = 0
+            i += 1
+            j += 1
+    
+    
+    for i in range (dim - 3):
+        j = dim - 1
+        c = 0
+        while i < dim:
+    
+            if list1[i][j] == 1:
+                c += 1
+                if c >= 4:
+                    diag += 1
+            else:
+                c = 0
+            i += 1
+            j -= 1
+    
+    
+    for i in range (dim - 2,2,-1):
+        j = 0
+        c = 0
+        while i >= 0:
+    
+            if list1[i][j] == 1:
+                c += 1
+                if c >= 4:
+                    diag += 1
+            else:
+                c = 0
+            i -= 1
+            j += 1
+
+Four_in_row = kath + ori + diag
+MesosOros = Four_in_row/100
+print("O mesos oros tetradwn einai")
+print(MesosOros)
