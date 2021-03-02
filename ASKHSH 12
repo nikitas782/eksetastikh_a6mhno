@@ -1,0 +1,17 @@
+file1 = open(input('ΔΩΣΕ ΑΡΧΕΙΟ:'),'r')
+
+
+text1 = [line.rstrip()for line in file1]
+text2 = []
+for i in range(len(text1)):
+    letter = text1[len(text1)-i-1]
+    if letter != '':
+        num1 = ord(letter)
+        num2 = 128 - num1
+        char1 = chr(num2)
+        text2.append(char1)
+    else:
+        text2.append('')
+
+listToStr = ''.join(map(str,text2))
+print(listToStr)
